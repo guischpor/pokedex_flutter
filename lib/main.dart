@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/core/provider_list/providers_list.dart';
+import 'package:pokedex_flutter/core/routes/app_routes.dart';
 import 'package:pokedex_flutter/pages/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final list = ProvidersList();
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokedex 2022',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: list.providers,
+      child: MaterialApp(
+        title: 'Pokedex 2022',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.indigo,
+            accentColor: Colors.amber,
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const HomePage(),
+        routes: {
+          AppRoutes.homePage: (context) => const HomePage(),
+        },
       ),
-      home: const HomePage(),
     );
   }
 }
