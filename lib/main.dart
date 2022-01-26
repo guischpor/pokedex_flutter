@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/provider_list/providers_list.dart';
 import 'package:pokedex_flutter/core/repositories/pokemon_repository.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: HomeContainer(
-          repository: PokemonRepository(),
+          repository: PokemonRepository(dio: Dio()),
         ),
         routes: {
           AppRoutes.homePage: (context) => const HomePage(pokemon: []),
