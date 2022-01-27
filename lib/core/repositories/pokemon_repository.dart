@@ -6,7 +6,7 @@ import 'package:pokedex_flutter/core/exceptions/exception_error.dart';
 import 'package:pokedex_flutter/core/models/pokemon_model.dart';
 
 abstract class IPokemonRepository {
-  Future<List<PokemonModel>> getAllPokemons();
+  Future<List<Pokemon>> getAllPokemons();
 }
 
 class PokemonRepository implements IPokemonRepository {
@@ -15,12 +15,12 @@ class PokemonRepository implements IPokemonRepository {
   PokemonRepository({required this.dio});
 
   @override
-  Future<List<PokemonModel>> getAllPokemons() async {
+  Future<List<Pokemon>> getAllPokemons() async {
     try {
       final response = await dio.get(ApiConsts.allPokemonsURL);
       final json = jsonDecode(response.data) as Map<String, dynamic>;
       final list = json['pokemon'] as List<dynamic>;
-      return list.map((e) => PokemonModel.fromMap(e)).toList();
+      return list.map((e) => Pokemon.fromMap(e)).toList();
     } catch (e) {
       throw ExceptionsError(message: 'Não foi possivel carregar os dados!');
     }

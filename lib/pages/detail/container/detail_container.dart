@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/exceptions/exception_error.dart';
 import 'package:pokedex_flutter/core/models/pokemon_model.dart';
 import 'package:pokedex_flutter/core/repositories/pokemon_repository.dart';
-import 'package:pokedex_flutter/pages/detail/container/detail_container.dart';
+import 'package:pokedex_flutter/pages/detail/detail_page.dart';
 import 'package:pokedex_flutter/widgets/po_error.dart';
-import 'package:pokedex_flutter/pages/home/home_page.dart';
 import 'package:pokedex_flutter/widgets/po_loading.dart';
 
-class HomeContainer extends StatelessWidget {
-  const HomeContainer({
+class DetailArguments {
+  final Pokemon pokemon;
+
+  DetailArguments({required this.pokemon});
+}
+
+class DetailContainer extends StatelessWidget {
+  const DetailContainer({
     Key? key,
     required this.repository,
-    required this.onItemTap,
+    required this.arguments,
   }) : super(key: key);
 
   final IPokemonRepository repository;
-  final Function(String, DetailArguments) onItemTap;
+  final DetailArguments arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +33,9 @@ class HomeContainer extends StatelessWidget {
 
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
-          return HomePage(
-            pokemon: snapshot.data!,
-            onItemTap: onItemTap,
+          return DetailsPage(
+            pokemon: arguments.pokemon,
+            list: snapshot.data!,
           );
         }
 

@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/provider_list/providers_list.dart';
 import 'package:pokedex_flutter/core/repositories/pokemon_repository.dart';
-import 'package:pokedex_flutter/core/routes/app_routes.dart';
-import 'package:pokedex_flutter/pages/home/container/home_container.dart';
-import 'package:pokedex_flutter/pages/home/home_page.dart';
-import 'package:pokedex_flutter/pages/detail/pokedex_details.dart';
+import 'package:pokedex_flutter/core/routes/route.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,13 +25,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: HomeContainer(
+        home: PokedexRoute(
           repository: PokemonRepository(dio: Dio()),
         ),
-        routes: {
-          AppRoutes.homePage: (context) => const HomePage(pokemon: []),
-          AppRoutes.pokedexDetailsPage: (context) => const PokedexDetailsPage(),
-        },
       ),
     );
   }
