@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 AppBar appBar({
-  required String title,
+  String? title,
   double? fontSize,
   Color? titleColor,
   bool? centerTitle = false,
   List<Widget>? actions,
   double? elevation,
   Color? backgroundColor,
+  Widget? leading,
 }) {
   return AppBar(
     title: Text(
-      title,
+      title!,
       style: TextStyle(
         color: titleColor,
         fontSize: fontSize,
@@ -21,5 +22,6 @@ AppBar appBar({
     centerTitle: centerTitle,
     actions: actions,
     elevation: elevation,
+    leading: leading,
   );
 }

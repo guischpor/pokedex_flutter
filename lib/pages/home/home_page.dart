@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
 
   Widget _body(
     BuildContext context,
-    List<Pokemon> pokemon,
+    List<Pokemon> list,
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -53,10 +53,11 @@ class HomePage extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          children: pokemon
+          children: list
               .map((e) => PokemonItemWidget(
                     pokemon: e,
                     onTap: onItemTap,
+                    index: list.indexOf(e),
                   ))
               .toList()),
     );

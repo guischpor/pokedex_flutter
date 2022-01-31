@@ -6,11 +6,13 @@ import 'package:pokedex_flutter/pages/home/widgets/type_widget.dart';
 class PokemonItemWidget extends StatelessWidget {
   final Pokemon pokemon;
   final Function(String, DetailArguments) onTap;
+  final int index;
 
   const PokemonItemWidget({
     Key? key,
     required this.pokemon,
     required this.onTap,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,10 @@ class PokemonItemWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       onTap: () => onTap(
         '/details',
-        DetailArguments(pokemon: pokemon),
+        DetailArguments(
+          pokemon: pokemon,
+          index: index,
+        ),
       ),
       child: Stack(
         children: [
