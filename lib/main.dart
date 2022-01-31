@@ -1,7 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/provider_list/providers_list.dart';
-import 'package:pokedex_flutter/core/routes/app_routes.dart';
-import 'package:pokedex_flutter/pages/home_page.dart';
+import 'package:pokedex_flutter/core/repositories/pokemon_repository.dart';
+import 'package:pokedex_flutter/core/routes/route.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,15 +21,13 @@ class MyApp extends StatelessWidget {
         title: 'Pokedex 2022',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.indigo,
-            accentColor: Colors.amber,
+            primarySwatch: Colors.red,
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
-        routes: {
-          AppRoutes.homePage: (context) => const HomePage(),
-        },
+        home: PokedexRoute(
+          repository: PokemonRepository(dio: Dio()),
+        ),
       ),
     );
   }
